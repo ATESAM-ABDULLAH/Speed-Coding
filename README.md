@@ -1,12 +1,9 @@
 # Speed_Coding
 Personal repository for storing coding solutions and practice sessions.
 
-Leetcode Account:
-
 ## Coding Platforms
 
-- <img src="https://leetcode-badge-showcase.vercel.app/api?username={atesamabdullah8}&theme={github-dark
-}" alt="LeetCode Badges"/>
+- <img src="https://leetcode-badge-showcase.vercel.app/api?username={atesamabdullah8}&theme={github-dark}" alt="LeetCode Badges"/>
   [Your LeetCode Profile](https://leetcode.com/YourLeetCodeProfile/): View my LeetCode submissions and progress.
 
 - [![Codeforces Logo](https://sta.codeforces.com/s/98849/favicon-32x32.png)](https://codeforces.com/profile/YourCodeforcesProfile)
