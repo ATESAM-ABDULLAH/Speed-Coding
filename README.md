@@ -4,7 +4,7 @@ Personal repository for storing coding solutions and practice sessions.
 
 ## Coding Platforms
 
-[![LeetCode Logo](https://assets.leetcode.com/static_assets/public/webpack_bundles/images/logo-dark.e99485d9b.svg)](https://leetcode.com/atesamabdullah8/): View my **LeetCode** submissions and progress.
+[![LeetCode Logo](https://leetcode.com/favicon.ico)](https://leetcode.com/atesamabdullah8/): View my **LeetCode** submissions and progress.
 
 [![Codeforces Logo](https://sta.codeforces.com/s/98849/favicon-32x32.png)](https://codeforces.com/profile/YourCodeforcesProfile): Check out my **Codeforces** submissions and contests.
 
