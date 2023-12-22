@@ -1,14 +1,12 @@
 # Speed_Coding
 Personal repository for storing coding solutions and practice sessions.
 
+
 ## Coding Platforms
 
-<img src="https://leetcode-badge-showcase.vercel.app/api?username={atesamabdullah8}&theme={github-dark}" alt="LeetCode Badges"/>
+[![LeetCode Logo](https://assets.leetcode.com/static_assets/public/webpack_bundles/images/logo-dark.e99485d9b.svg)](https://leetcode.com/atesamabdullah8/): View my **LeetCode** submissions and progress.
 
--  [Profile](https://leetcode.com/atesamabdullah8/): View my LeetCode submissions and progress.
-
-- [![Codeforces Logo](https://sta.codeforces.com/s/98849/favicon-32x32.png)](https://codeforces.com/profile/YourCodeforcesProfile)
-  [Your Codeforces Profile](https://codeforces.com/profile/YourCodeforcesProfile): Check out my Codeforces submissions and contests.
+[![Codeforces Logo](https://sta.codeforces.com/s/98849/favicon-32x32.png)](https://codeforces.com/profile/YourCodeforcesProfile): Check out my **Codeforces** submissions and contests.
 
 
 ## Folder Structure
