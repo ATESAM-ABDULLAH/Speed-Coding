@@ -1,12 +1,17 @@
 # Speed_Coding
 Personal repository for storing coding solutions and practice sessions.
 
+Leetcode Account:
+
 ## Coding Platforms
 
-- **LeetCode**: Solutions categorized by problem_set/problem_type/problem_number.
-- **Codeforces**: Practice solutions and contest submissions organized systematically.
+- <img src="https://leetcode-badge-showcase.vercel.app/api?username={atesamabdullah8}&theme={github-dark
+}" alt="LeetCode Badges"/>
+  [Your LeetCode Profile](https://leetcode.com/YourLeetCodeProfile/): View my LeetCode submissions and progress.
 
-Explore different folders for specific problem sets or platforms.
+- [![Codeforces Logo](https://sta.codeforces.com/s/98849/favicon-32x32.png)](https://codeforces.com/profile/YourCodeforcesProfile)
+  [Your Codeforces Profile](https://codeforces.com/profile/YourCodeforcesProfile): Check out my Codeforces submissions and contests.
+
 
 ## Folder Structure
 
