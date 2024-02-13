@@ -1,4 +1,4 @@
-# Speed_Coding
+# Speed Coding
 Personal repository for storing coding solutions and practice sessions.
 
 
