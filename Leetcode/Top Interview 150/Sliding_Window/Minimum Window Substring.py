@@ -26,6 +26,7 @@ def minWindow(s, t):
             i += 1  # update i to start+1 for next window
     return s[start:end]
 
+
 s = "ADOBECODEBANC"
 t = "ABC"
-print(minWindow(s,t))
+print(minWindow(s, t))
