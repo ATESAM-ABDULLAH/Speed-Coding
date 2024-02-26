@@ -3,35 +3,39 @@ def setZeroes(matrix):
     :type matrix: List[List[int]]
     :rtype: None Do not return anything, modify matrix in-place instead.
     """
-    # if len(matrix) == 0 or len(matrix[0]) == 0:
-    #     return
-    R, C = len(matrix), len(matrix[0])
-    f_r_z, f_c_z = False, False
+    m = len(matrix)
+    n = len(matrix[0])
 
-    for r in range(R):
-        for c in range(C):
-            if matrix[r][c] == 0:  # zero found
+    first_row_has_zero = False
+    first_col_has_zero = False
 
-                if r == 0:  # if orig zero in first row
-                    f_r_z = True
-                if c == 0:  # if orig zero in first col
-                    f_c_z = True
+    # iterate through matrix to mark the zero row and cols
+    for row in range(m):
+        for col in range(n):
+            if matrix[row][col] == 0:
+                if row == 0:
+                    first_row_has_zero = True
+                if col == 0:
+                    first_col_has_zero = True
+                matrix[row][0] = matrix[0][col] = 0
 
-                matrix[0][c] = matrix[r][0] = (
-                    0  # mark the first row and column as zeros
-                )
+    # iterate through matrix to update the cell to be zero if it's in a zero row or col
+    for row in range(1, m):
+        for col in range(1, n):
+            matrix[row][col] = (
+                0 if matrix[0][col] == 0 or matrix[row][0] == 0 else matrix[row][col]
+            )
 
-    for r in range(R):
-        for c in range(C):
-            if matrix[0][c] == 0 or matrix[r][0] == 0:
-                matrix[r][c] = 0
+    # update the first row and col if they're zero
+    if first_row_has_zero:
+        for col in range(n):
+            matrix[0][col] = 0
 
-    if f_r_z:
-        matrix[0] = [0] * C
-    if f_c_z:
-        matrix = [[0] + m[1:] for m in matrix]
+    if first_col_has_zero:
+        for row in range(m):
+            matrix[row][0] = 0
 
 
-matrix = [[1, 1, 1], [1, 1, 1], [0, 1, 1]]
+matrix = [[0, 1, 2, 0], [3, 4, 5, 2], [1, 3, 1, 5]]
 setZeroes(matrix)
 print(matrix)
