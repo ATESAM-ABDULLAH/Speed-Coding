@@ -39,10 +39,7 @@ l1 = ListNode(1)
 l1.next = ListNode(3)
 l1.next.next = ListNode(5)
 
-l2 = ListNode(1)
-l2.next = ListNode(4)
-l2.next.next = ListNode(6)
-l2.next.next.next = ListNode(8)
+
 
 s = Solution()
 l3 = s.mergeTwoLists(l1, l2)
