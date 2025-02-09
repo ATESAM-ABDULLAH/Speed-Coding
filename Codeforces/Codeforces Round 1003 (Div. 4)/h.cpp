@@ -2,34 +2,37 @@
 using namespace std;
 
 typedef long long ll;
-const ll MOD = 998244353;
+const ll MODULO = 998244353;
 
-struct BIT
+struct FenwickTree
 {
-    int n;
-    vector<ll> f;
-    BIT(int n) : n(n) { f.assign(n + 1, 0); }
-    void upd(int i, ll d)
+    int sz;
+    vector<ll> tree;
+    FenwickTree(int size) : sz(size) { tree.assign(size + 1, 0); }
+
+    void update(int idx, ll delta)
     {
-        for (; i <= n; i += i & -i)
+        for (; idx <= sz; idx += idx & -idx)
         {
-            f[i] = (f[i] + d) % MOD;
-            if (f[i] < 0)
-                f[i] += MOD;
+            tree[idx] = (tree[idx] + delta) % MODULO;
+            if (tree[idx] < 0)
+                tree[idx] += MODULO;
         }
     }
-    ll qry(int i)
+
+    ll query(int idx)
     {
-        ll s = 0;
-        for (; i; i -= i & -i)
-            s = (s + f[i]) % MOD;
-        return s;
+        ll sum = 0;
+        for (; idx; idx -= idx & -idx)
+            sum = (sum + tree[idx]) % MODULO;
+        return sum;
     }
-    ll rng(int l, int r)
+
+    ll rangeQuery(int left, int right)
     {
-        if (l > r)
+        if (left > right)
             return 0;
-        return (qry(r) - qry(l - 1) + MOD) % MOD;
+        return (query(right) - query(left - 1) + MODULO) % MODULO;
     }
 };
 
@@ -38,82 +41,91 @@ int main()
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int T;
-    cin >> T;
-    const int MAX = 200005;
-    vector<ll> p(MAX);
-    p[0] = 1;
-    for (int i = 1; i < MAX; i++)
-        p[i] = (p[i - 1] * 2) % MOD;
+    int testCases;
+    cin >> testCases;
+    const int MAXN = 200005;
 
-    while (T--)
+    vector<ll> power2(MAXN);
+    power2[0] = 1;
+    for (int i = 1; i < MAXN; i++)
+        power2[i] = (power2[i - 1] * 2) % MODULO;
+
+    while (testCases--)
     {
-        string s;
-        cin >> s;
-        int n = s.size();
-        int q;
-        cin >> q;
-        BIT b0(n), b1(n), a0(n), a1(n);
-        ll F = 0, r0 = 0, r1 = 0;
-        for (int i = 1; i <= n; i++)
+        string binaryString;
+        cin >> binaryString;
+        int len = binaryString.size();
+        int queries;
+        cin >> queries;
+
+        FenwickTree FT0(len), FT1(len), IT0(len), IT1(len);
+        ll result = 0, count0 = 0, count1 = 0;
+
+        for (int i = 1; i <= len; i++)
         {
-            if (s[i - 1] == '0')
+            if (binaryString[i - 1] == '0')
             {
-                F = (F + r1 * p[n - i]) % MOD;
-                r0 = (r0 + p[i - 1]) % MOD;
-                b0.upd(i, p[i - 1]);
-                a0.upd(i, p[n - i]);
+                result = (result + count1 * power2[len - i]) % MODULO;
+                count0 = (count0 + power2[i - 1]) % MODULO;
+                FT0.update(i, power2[i - 1]);
+                IT0.update(i, power2[len - i]);
             }
             else
             {
-                F = (F + r0 * p[n - i]) % MOD;
-                r1 = (r1 + p[i - 1]) % MOD;
-                b1.upd(i, p[i - 1]);
-                a1.upd(i, p[n - i]);
+                result = (result + count0 * power2[len - i]) % MODULO;
+                count1 = (count1 + power2[i - 1]) % MODULO;
+                FT1.update(i, power2[i - 1]);
+                IT1.update(i, power2[len - i]);
             }
         }
-        for (int i = 0; i < q; i++)
+
+        for (int i = 0; i < queries; i++)
         {
-            int k;
-            cin >> k;
-            int o = s[k - 1] - '0', w = 1 - o;
-            ll S = (o == 0 ? a0.rng(k + 1, n) : a1.rng(k + 1, n));
-            ll T = (w == 0 ? a0.rng(k + 1, n) : a1.rng(k + 1, n));
-            ll d1 = (p[k - 1] * ((S - T) % MOD)) % MOD;
-            if (d1 < 0)
-                d1 += MOD;
-            ll X = (o == 0 ? b0.rng(1, k - 1) : b1.rng(1, k - 1));
-            ll Y = (w == 0 ? b0.rng(1, k - 1) : b1.rng(1, k - 1));
-            ll d2 = (p[n - k] * ((X - Y) % MOD)) % MOD;
-            if (d2 < 0)
-                d2 += MOD;
-            ll d = (d1 + d2) % MOD;
-            F = (F + d) % MOD;
-            if (o == 0)
+            int idx;
+            cin >> idx;
+            int curr = binaryString[idx - 1] - '0', next = 1 - curr;
+
+            ll sum1 = (curr == 0 ? IT0.rangeQuery(idx + 1, len) : IT1.rangeQuery(idx + 1, len));
+            ll sum2 = (next == 0 ? IT0.rangeQuery(idx + 1, len) : IT1.rangeQuery(idx + 1, len));
+            ll diff1 = (power2[idx - 1] * ((sum1 - sum2) % MODULO)) % MODULO;
+            if (diff1 < 0)
+                diff1 += MODULO;
+
+            ll sum3 = (curr == 0 ? FT0.rangeQuery(1, idx - 1) : FT1.rangeQuery(1, idx - 1));
+            ll sum4 = (next == 0 ? FT0.rangeQuery(1, idx - 1) : FT1.rangeQuery(1, idx - 1));
+            ll diff2 = (power2[len - idx] * ((sum3 - sum4) % MODULO)) % MODULO;
+            if (diff2 < 0)
+                diff2 += MODULO;
+
+            ll totalDiff = (diff1 + diff2) % MODULO;
+            result = (result + totalDiff) % MODULO;
+
+            if (curr == 0)
             {
-                b0.upd(k, -p[k - 1]);
-                a0.upd(k, -p[n - k]);
+                FT0.update(idx, -power2[idx - 1]);
+                IT0.update(idx, -power2[len - idx]);
             }
             else
             {
-                b1.upd(k, -p[k - 1]);
-                a1.upd(k, -p[n - k]);
+                FT1.update(idx, -power2[idx - 1]);
+                IT1.update(idx, -power2[len - idx]);
             }
-            if (w == 0)
+            if (next == 0)
             {
-                b0.upd(k, p[k - 1]);
-                a0.upd(k, p[n - k]);
+                FT0.update(idx, power2[idx - 1]);
+                IT0.update(idx, power2[len - idx]);
             }
             else
             {
-                b1.upd(k, p[k - 1]);
-                a1.upd(k, p[n - k]);
+                FT1.update(idx, power2[idx - 1]);
+                IT1.update(idx, power2[len - idx]);
             }
-            s[k - 1] = char('0' + w);
-            ll tot = (p[n] - 1 + F) % MOD;
-            if (tot < 0)
-                tot += MOD;
-            cout << tot << " ";
+
+            binaryString[idx - 1] = char('0' + next);
+            ll finalRes = (power2[len] - 1 + result) % MODULO;
+            if (finalRes < 0)
+                finalRes += MODULO;
+            cout << finalRes << " ";
         }
         cout << "\n";
     }

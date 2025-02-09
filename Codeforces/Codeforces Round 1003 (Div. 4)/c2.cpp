@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 int main()
 {
     ios::sync_with_stdio(false);
@@ -7,42 +8,49 @@ int main()
 
     int t;
     cin >> t;
+
     while (t--)
     {
         int n, m;
         cin >> n >> m;
-        vector<int> a(n);
+
+        vector<long long> a(n), b(m);
         for (auto &x : a)
             cin >> x;
-        vector<long long> b(m);
         for (auto &x : b)
             cin >> x;
+
         sort(b.begin(), b.end());
 
-        const long long INF = 1e18;
-        long long dp = -1e18;
+        const long long INF = 1LL << 60;
+        long long dp = -INF;
         bool ok = true;
+
         for (int i = 0; i < n; i++)
         {
-            long long ai = a[i];
-            long long op0 = INF, op1 = INF;
-            if (ai >= dp)
-                op0 = ai;
-            long long need = dp + ai;
-            auto it = lower_bound(b.begin(), b.end(), need);
+            long long o1 = INF, o2 = INF;
+
+            if (a[i] >= dp)
+                o1 = a[i];
+
+            long long T = dp + a[i];
+            auto it = lower_bound(b.begin(), b.end(), T);
+
             if (it != b.end())
-            {
-                op1 = (*it) - ai;
-            }
-            long long cur = min(op0, op1);
+                o2 = *it - a[i];
+
+            long long cur = min(o1, o2);
             if (cur == INF)
             {
                 ok = false;
                 break;
             }
+
             dp = cur;
         }
+
         cout << (ok ? "YES" : "NO") << "\n";
     }
+
     return 0;
 }

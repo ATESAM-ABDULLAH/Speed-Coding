@@ -6,7 +6,7 @@ Personal repository for storing coding solutions and practice sessions.
 
 [![LeetCode Logo](https://leetcode.com/favicon.ico)](https://leetcode.com/atesamabdullah8/): View my **LeetCode** submissions and progress.
 
-[![Codeforces Logo](https://sta.codeforces.com/s/98849/favicon-32x32.png)](https://codeforces.com/profile/atesam): Check out my **Codeforces** submissions and contests.
+[![Codeforces Logo](https://sta.codeforces.com/s/98849/favicon-32x32.png)]: Check out my **Codeforces** submissions and contests.
 
 
 ## Folder Structure
